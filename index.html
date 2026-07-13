@@ -168,8 +168,19 @@
     .est-total { background: var(--surface); border-radius: 6px; padding: 0.75rem 1rem; margin-top: 1rem; display: flex; justify-content: space-between; font-size: 1.1rem; font-weight: 700; }
     .est-total span { color: var(--accent); }
 
-    /* ── Scroll up ── */
-    .footer { text-align: center; padding: 2rem; color: var(--muted); font-size: 0.75rem; border-top: 1px solid var(--border); }
+    /* ── Disclaimer / Footer ── */
+    .footer { color: var(--muted); font-size: 0.75rem; border-top: 1px solid var(--border); }
+    .disclaimer { padding: 1.5rem 2rem; max-width: 1200px; margin: 0 auto; }
+    .disclaimer h3 { font-size: 0.82rem; font-weight: 700; color: var(--text); margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em; }
+    .disclaimer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1rem; }
+    @media (max-width: 700px) { .disclaimer-grid { grid-template-columns: 1fr; } }
+    .disclaimer-block h4 { font-size: 0.78rem; font-weight: 600; color: var(--muted); margin-bottom: 0.4rem; }
+    .disclaimer-block p, .disclaimer-block li { font-size: 0.75rem; color: var(--muted); line-height: 1.6; }
+    .disclaimer-block ul { list-style: none; padding: 0; }
+    .disclaimer-block ul li::before { content: '↗ '; color: var(--accent); }
+    .disclaimer-block a { color: var(--accent); text-decoration: none; }
+    .disclaimer-block a:hover { text-decoration: underline; }
+    .disclaimer-note { font-size: 0.72rem; color: var(--muted); border-top: 1px solid var(--border); padding-top: 0.75rem; text-align: center; }
 
     /* ── Responsive ── */
     @media (max-width: 700px) {
@@ -188,7 +199,7 @@
   <h1>Iceland <span>Ring Road</span> Trip Planner</h1>
   <div class="hero-sub">Group travel dashboard · Clockwise circumnavigation · Budapest departure</div>
   <div class="hero-pills">
-    <div class="pill">🗓 <strong>12–14 days</strong> recommended</div>
+    <div class="pill">🗓 <strong>5–14 days</strong> options</div>
     <div class="pill">👥 <strong>8–10 people</strong></div>
     <div class="pill">✈️ <strong>BUD → KEF</strong></div>
     <div class="pill">🏕 <strong>2 campervans</strong></div>
@@ -200,7 +211,8 @@
 <!-- ── NAV ── -->
 <nav class="nav">
   <button class="nav-btn active" onclick="show('overview')">Overview</button>
-  <button class="nav-btn" onclick="show('itinerary')">Itinerary</button>
+  <button class="nav-btn" onclick="show('shorttrips')">Short Trips</button>
+  <button class="nav-btn" onclick="show('itinerary')">Full Ring (14 days)</button>
   <button class="nav-btn" onclick="show('budget')">Budget</button>
   <button class="nav-btn" onclick="show('rvs')">RV Rentals</button>
   <button class="nav-btn" onclick="show('flights')">Flights</button>
@@ -234,8 +246,8 @@
     </div>
     <div class="kpi">
       <div class="kpi-label">Days on the road</div>
-      <div class="kpi-value">12–14</div>
-      <div class="kpi-sub">+ 1 day arrival, 1 departure</div>
+      <div class="kpi-value">5–14</div>
+      <div class="kpi-sub">short to full ring options</div>
     </div>
     <div class="kpi">
       <div class="kpi-label">Recommended month</div>
@@ -312,11 +324,92 @@
   </div>
 </div>
 
+<!-- ══════════════════════════════════════════════ SHORT TRIPS ══ -->
+<div id="shorttrips" class="section">
+  <div class="section-header">
+    <h2>Shorter Trip Options</h2>
+    <p>Not everyone has 2 weeks. Here are 3 curated itineraries for groups who want a focused, comfortable Iceland experience.</p>
+  </div>
+
+  <div class="card" style="background:rgba(88,166,255,0.07); border-color:rgba(88,166,255,0.25); margin-bottom:1.25rem">
+    <strong style="color:var(--accent)">Which should you choose?</strong>
+    <table style="margin-top:0.75rem">
+      <thead><tr><th>Duration</th><th>Route</th><th>Distance</th><th>Best for</th></tr></thead>
+      <tbody>
+        <tr><td><strong style="color:var(--green)">5–6 days</strong></td><td>South Coast + Golden Circle loop</td><td>~700 km</td><td>First taste of Iceland, waterfalls, glaciers, black beaches</td></tr>
+        <tr><td><strong style="color:var(--orange)">7 days</strong></td><td>South Coast + North highlights (partial ring)</td><td>~1,200 km</td><td>Best balance of variety without exhausting driving</td></tr>
+        <tr><td><strong style="color:var(--purple)">10 days</strong></td><td>Full Ring Road, fast-paced</td><td>~2,200 km</td><td>See everything, minimal leisure time per stop</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 5-day -->
+  <div class="card" style="border-left: 3px solid var(--green); margin-bottom: 1.25rem">
+    <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:0.75rem; flex-wrap:wrap; gap:0.5rem">
+      <div>
+        <span style="font-size:1rem; font-weight:700; color:var(--green)">Option A — 5 Days: South Coast + Golden Circle</span>
+        <div style="font-size:0.78rem; color:var(--muted); margin-top:0.2rem">KEF → Golden Circle → South Coast → Jökulsárlón → KEF · ~700 km total</div>
+      </div>
+      <span style="background:rgba(63,185,80,0.15); border:1px solid rgba(63,185,80,0.3); color:var(--green); border-radius:4px; padding:0.2rem 0.6rem; font-size:0.78rem; font-weight:600">€1,100–1,400 / person</span>
+    </div>
+    <div class="timeline" id="timeline5"></div>
+    <div style="margin-top:0.75rem; padding:0.75rem; background:var(--surface2); border-radius:6px; font-size:0.82rem; color:var(--muted)">
+      <strong style="color:var(--text)">What you miss:</strong> East Fjords, North Iceland (Mývatn, Akureyri), whale watching, Snæfellsnes. Good for a first visit — you'll still see the most iconic sights.
+    </div>
+  </div>
+
+  <!-- 7-day -->
+  <div class="card" style="border-left: 3px solid var(--orange); margin-bottom: 1.25rem">
+    <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:0.75rem; flex-wrap:wrap; gap:0.5rem">
+      <div>
+        <span style="font-size:1rem; font-weight:700; color:var(--orange)">Option B — 7 Days: South Coast + Best of North</span>
+        <div style="font-size:0.78rem; color:var(--muted); margin-top:0.2rem">KEF → South Coast → Mývatn → Akureyri → Reykjavík · ~1,200 km · partial ring</div>
+      </div>
+      <span style="background:rgba(210,153,34,0.15); border:1px solid rgba(210,153,34,0.3); color:var(--orange); border-radius:4px; padding:0.2rem 0.6rem; font-size:0.78rem; font-weight:600">€1,400–1,800 / person</span>
+    </div>
+    <div class="timeline" id="timeline7"></div>
+    <div style="margin-top:0.75rem; padding:0.75rem; background:var(--surface2); border-radius:6px; font-size:0.82rem; color:var(--muted)">
+      <strong style="color:var(--text)">What you miss:</strong> East Fjords, Snæfellsnes, Húsavík whale watching. <strong style="color:var(--orange)">This is the sweet spot</strong> — covers all the headline sights without the East Fjords detour (which adds 2 days of driving alone).
+    </div>
+  </div>
+
+  <!-- 10-day -->
+  <div class="card" style="border-left: 3px solid var(--purple)">
+    <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:0.75rem; flex-wrap:wrap; gap:0.5rem">
+      <div>
+        <span style="font-size:1rem; font-weight:700; color:var(--purple)">Option C — 10 Days: Full Ring, Compact Pace</span>
+        <div style="font-size:0.78rem; color:var(--muted); margin-top:0.2rem">Full clockwise Ring Road · ~2,200 km · every region covered</div>
+      </div>
+      <span style="background:rgba(188,140,255,0.15); border:1px solid rgba(188,140,255,0.3); color:var(--purple); border-radius:4px; padding:0.2rem 0.6rem; font-size:0.78rem; font-weight:600">€1,800–2,200 / person</span>
+    </div>
+    <div class="timeline" id="timeline10"></div>
+    <div style="margin-top:0.75rem; padding:0.75rem; background:var(--surface2); border-radius:6px; font-size:0.82rem; color:var(--muted)">
+      <strong style="color:var(--text)">Trade-off:</strong> You see everything on the ring but have less leisure time at each stop. East Fjords becomes a drive-through rather than a slow exploration. Best if the group is energetic and likes being on the move.
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:1rem">
+    <div class="card-title">Budget comparison — all trip lengths (per person, mid-range, 9 ppl)</div>
+    <table>
+      <thead><tr><th>Duration</th><th>Route</th><th class="right">RV (2 vans)</th><th class="right">Food</th><th class="right">Flights</th><th class="right">Activities</th><th class="right"><strong>Total/person</strong></th></tr></thead>
+      <tbody>
+        <tr><td style="color:var(--green)"><strong>5 days</strong></td><td>South + Golden Circle</td><td class="right">€178</td><td class="right">€200</td><td class="right">€300</td><td class="right">€180</td><td class="right"><strong style="color:var(--green)">€1,050</strong></td></tr>
+        <tr><td style="color:var(--green)"><strong>6 days</strong></td><td>South + Golden Circle +1</td><td class="right">€213</td><td class="right">€240</td><td class="right">€300</td><td class="right">€200</td><td class="right"><strong style="color:var(--green)">€1,150</strong></td></tr>
+        <tr><td style="color:var(--green)"><strong>7 days</strong></td><td>South + North highlights</td><td class="right">€249</td><td class="right">€280</td><td class="right">€300</td><td class="right">€230</td><td class="right"><strong style="color:var(--orange)">€1,350</strong></td></tr>
+        <tr><td style="color:var(--orange)"><strong>10 days</strong></td><td>Full ring, compact</td><td class="right">€355</td><td class="right">€400</td><td class="right">€300</td><td class="right">€270</td><td class="right"><strong style="color:var(--orange)">€1,720</strong></td></tr>
+        <tr><td style="color:var(--purple)"><strong>12 days</strong></td><td>Full ring, comfortable</td><td class="right">€427</td><td class="right">€480</td><td class="right">€300</td><td class="right">€300</td><td class="right"><strong style="color:var(--purple)">€2,050</strong></td></tr>
+        <tr style="background:var(--surface2)"><td style="color:var(--purple)"><strong>14 days</strong></td><td>Full ring + Snæfellsnes</td><td class="right">€498</td><td class="right">€560</td><td class="right">€300</td><td class="right">€300</td><td class="right"><strong style="color:var(--purple)">€2,400</strong></td></tr>
+      </tbody>
+    </table>
+    <div style="font-size:0.75rem;color:var(--muted);margin-top:0.5rem">Estimates include flights, RV rental + insurance, camping cards, fuel, food, and activities. All figures for 9 people, mid-range style.</div>
+  </div>
+</div>
+
 <!-- ══════════════════════════════════════════════ ITINERARY ══ -->
 <div id="itinerary" class="section">
   <div class="section-header">
-    <h2>14-Day Clockwise Ring Road Itinerary</h2>
-    <p>Reykjavík → South Coast → East Fjords → North → Snæfellsnes → Reykjavík · Total ~2,780 km</p>
+    <h2>Full Ring Road — 14-Day Clockwise Itinerary</h2>
+    <p>Reykjavík → South Coast → East Fjords → North → Snæfellsnes → Reykjavík · Total ~2,780 km · See "Short Trips" tab for 5–10 day options</p>
   </div>
 
   <div class="grid-2" style="margin-bottom:1rem">
@@ -358,7 +451,10 @@
         <button class="toggle-btn" onclick="setStyle('comfort')">Comfort</button>
       </div>
       <div class="card-title" style="margin-top:0.75rem">Trip Duration</div>
-      <div class="toggle-row">
+      <div class="toggle-row" style="flex-wrap:wrap">
+        <button class="toggle-btn" onclick="setDays(5)">5 days</button>
+        <button class="toggle-btn" onclick="setDays(6)">6 days</button>
+        <button class="toggle-btn" onclick="setDays(7)">7 days</button>
         <button class="toggle-btn" onclick="setDays(10)">10 days</button>
         <button class="toggle-btn" onclick="setDays(12)">12 days</button>
         <button class="toggle-btn active" onclick="setDays(13)">13 days</button>
@@ -691,7 +787,57 @@
 </div>
 
 <footer class="footer">
-  Iceland Ring Road Trip Planner · Data based on 2024/2025 season · Prices should be verified closer to travel date · ISK/EUR rate: ~145 · Generated July 2026
+  <div class="disclaimer">
+    <h3>📋 Data Sources, Methodology & Disclaimer</h3>
+    <div class="disclaimer-grid">
+
+      <div class="disclaimer-block">
+        <h4>Primary Sources Used</h4>
+        <ul>
+          <li><a href="https://guidetoiceland.is" target="_blank">guidetoiceland.is</a> — Ring Road itineraries, attraction info, driving times</li>
+          <li><a href="https://happycampers.is" target="_blank">happycampers.is</a> — Campervan rental rates and vehicle specs</li>
+          <li><a href="https://campingcard.is" target="_blank">campingcard.is</a> — Camping Card pricing and participating sites</li>
+          <li><a href="https://visiticeland.com" target="_blank">visiticeland.com</a> — Iceland Tourism Board seasonal info and safety</li>
+          <li><a href="https://playairlines.com" target="_blank">playairlines.com</a> — Low-cost KEF flight routes from European hubs</li>
+          <li><a href="https://icelandair.com" target="_blank">icelandair.com</a> — KEF connection routes and stopover program</li>
+          <li><a href="https://northsailing.is" target="_blank">northsailing.is</a> — Húsavík whale watching tour pricing</li>
+          <li><a href="https://myvatnnaturebaths.is" target="_blank">myvatnnaturebaths.is</a> — Mývatn Nature Baths entry fees</li>
+          <li><a href="https://icelagoon.is" target="_blank">icelagoon.is</a> — Jökulsárlón boat tour pricing</li>
+          <li><a href="https://bluelagoon.com" target="_blank">bluelagoon.com</a> — Blue Lagoon entry tiers</li>
+          <li><a href="https://safetravel.is" target="_blank">safetravel.is</a> — Road safety, F-road rules, emergency info</li>
+          <li><a href="https://vedur.is" target="_blank">vedur.is</a> — Iceland Meteorological Office (weather)</li>
+        </ul>
+      </div>
+
+      <div class="disclaimer-block">
+        <h4>Community &amp; Aggregator Sources</h4>
+        <ul>
+          <li><a href="https://reddit.com/r/VisitingIceland" target="_blank">reddit.com/r/VisitingIceland</a> — Real traveler cost reports and tips</li>
+          <li><a href="https://skyscanner.com" target="_blank">skyscanner.com</a> — Historical BUD→KEF flight price ranges</li>
+          <li><a href="https://campervaniceland.com" target="_blank">campervaniceland.com</a> — Vehicle specs and rental comparison</li>
+          <li><a href="https://gocampers.is" target="_blank">gocampers.is</a> — Campervan pricing reference</li>
+          <li><a href="https://n1.is" target="_blank">n1.is</a> — Fuel station network and price data</li>
+          <li><a href="https://lonelyplanet.com/iceland" target="_blank">lonelyplanet.com/iceland</a> — Daily budget benchmarks and food prices</li>
+        </ul>
+
+        <h4 style="margin-top:0.75rem">How the Budget Numbers Were Calculated</h4>
+        <p><strong>Flights:</strong> Based on Skyscanner historical averages for BUD→hub + hub→KEF return, shoulder season (May/Sep). Mid-range = €300/person is a realistic early-booking estimate for a 1-stop connection.</p>
+        <p style="margin-top:0.4rem"><strong>RV rental:</strong> Daily rates taken from Happy Campers and Go Campers published 2024/2025 shoulder-season price lists for 4–5 berth vehicles. Two vehicles assumed for all scenarios (no single vehicle seats 8–10).</p>
+        <p style="margin-top:0.4rem"><strong>Insurance extras:</strong> SCDW + Gravel Protection + Sand &amp; Ash Protection. Taken from published add-on rates across Happy Campers, Kuku Campers, and Campervan Iceland.</p>
+        <p style="margin-top:0.4rem"><strong>Fuel:</strong> Calculated as: <code>trip_km × 14L/100km × 2 vans × €2.10/L</code>. Fuel price from N1 and Orkan 2024/2025 average. Consumption assumes loaded 4–5 berth campervans.</p>
+        <p style="margin-top:0.4rem"><strong>Food:</strong> Budget = €28/person/day (mostly self-catering at Bonus supermarket). Mid = €40 (cook breakfast/lunch, one meal out every 2–3 days). Comfort = €58 (restaurant meals most days). Benchmarks from Lonely Planet Iceland and r/VisitingIceland 2024 trip reports.</p>
+        <p style="margin-top:0.4rem"><strong>Activities:</strong> Sum of selected key paid activities per person: Jökulsárlón boat tour (€65), whale watching (€100), Mývatn Nature Baths (€44), one Northern Lights tour (€75), misc entry fees. Budget style = fewer paid activities, comfort = all of the above plus extras.</p>
+        <p style="margin-top:0.4rem"><strong>Camping Cards:</strong> One card per 2 adults at €175/card (2025 official price from campingcard.is), covering up to 28 nights.</p>
+        <p style="margin-top:0.4rem"><strong>Short trip km estimates:</strong> 5d ≈ 700 km (South Coast loop), 7d ≈ 1,200 km (partial ring), 10d ≈ 2,000 km (full ring fast), 13d ≈ 3,000 km (full ring + Snæfellsnes + detours).</p>
+      </div>
+
+    </div>
+    <div class="disclaimer-note">
+      ⚠ All prices are estimates based on 2024/2025 season data compiled in July 2026. Iceland experiences ~5–8% annual tourism price inflation. Actual costs may vary significantly.
+      Verify all prices directly with vendors before booking. ISK/EUR exchange rate used: €1 ≈ ISK 147 (July 2026 benchmark).
+      This dashboard was generated with AI assistance (Claude, Anthropic) and is intended as a planning reference only — not a booking platform.
+    </div>
+  </div>
 </footer>
 
 <script>
@@ -795,11 +941,17 @@ const styles = {
 function calcBudget() {
   const s = styles[travelStyle];
   const numVans = 2;
+  // Fuel scales with trip length: 5d≈700km, 7d≈1200km, 10d≈2000km, 13d≈3000km
+  const fuelKmMap = { 5: 700, 6: 900, 7: 1200, 10: 2000, 12: 2500, 13: 3000, 14: 3200 };
+  const fuelKm = fuelKmMap[tripDays] || (tripDays * 230);
+  const fuelLiters = fuelKm / 100 * 14 * numVans;
+  const fuelPrice = travelStyle === 'budget' ? 1.90 : travelStyle === 'comfort' ? 2.20 : 2.10;
+  const fuelTotal = Math.round(fuelLiters * fuelPrice);
+
   const rvTotal = s.rvDay * numVans * tripDays;
   const insTotal = s.insDay * numVans * tripDays;
   const ccTotal = Math.ceil(groupSize / 2) * s.campCard;
   const foodTotal = s.foodDay * groupSize * tripDays;
-  const fuelTotal = s.fuel;
   const flightTotal = s.flights * groupSize;
   const actTotal = s.activities * groupSize;
   const miscTotal = Math.round(groupSize * 100);
@@ -812,7 +964,7 @@ function calcBudget() {
     { label: `🚐 RV rental (2 vans × ${tripDays} days × €${s.rvDay}/day)`, value: `€${rvTotal.toLocaleString()}`, pp: Math.round(rvTotal/groupSize) },
     { label: `🛡 Insurance extras (€${s.insDay}/van/day)`, value: `€${insTotal.toLocaleString()}`, pp: Math.round(insTotal/groupSize) },
     { label: `🏕 Camping Cards (${Math.ceil(groupSize/2)} cards × €${s.campCard})`, value: `€${ccTotal.toLocaleString()}`, pp: Math.round(ccTotal/groupSize) },
-    { label: `⛽ Fuel (2 vehicles ~3,000 km)`, value: `€${fuelTotal.toLocaleString()}`, pp: Math.round(fuelTotal/groupSize) },
+    { label: `⛽ Fuel (2 vehicles ~${fuelKm.toLocaleString()} km)`, value: `€${fuelTotal.toLocaleString()}`, pp: Math.round(fuelTotal/groupSize) },
     { label: `🛒 Food (€${s.foodDay}/person/day × ${tripDays} days)`, value: `€${foodTotal.toLocaleString()}`, pp: Math.round(foodTotal/groupSize) },
     { label: `🎯 Activities & entry fees`, value: `€${actTotal.toLocaleString()}`, pp: Math.round(actTotal/groupSize) },
     { label: `📦 Buffer / misc`, value: `€${miscTotal.toLocaleString()}`, pp: 100 },
@@ -845,9 +997,110 @@ function setStyle(s) {
 
 function setDays(d) {
   tripDays = d;
-  document.querySelectorAll('#budget .toggle-btn').forEach(b => { if(['10 days','12 days','13 days','14 days'].includes(b.textContent)) b.classList.remove('active'); });
+  const allDayBtns = ['5 days','6 days','7 days','10 days','12 days','13 days','14 days'];
+  document.querySelectorAll('#budget .toggle-btn').forEach(b => { if(allDayBtns.includes(b.textContent)) b.classList.remove('active'); });
   event.target.classList.add('active');
   calcBudget();
+}
+
+// ── Short itineraries ─────────────────────────────────────────────────────
+
+const itin5 = [
+  { day: 'D1', route: 'KEF → Golden Circle', km: 230, sleep: 'Selfoss campsite',
+    desc: 'Arrive KEF, pick up vans. Drive the Golden Circle: Þingvellir National Park (UNESCO, tectonic plates), Geysir geothermal area (Strokkur erupts every 5–10 min), Gullfoss double waterfall. Stock up at Selfoss Bonus supermarket.',
+    tags: ['Þingvellir (free)', 'Geysir (free)', 'Gullfoss (free)', '🛒 Stock up at Selfoss Bonus'] },
+  { day: 'D2', route: 'Selfoss → Vík', km: 180, sleep: 'Vík campsite',
+    desc: 'South Coast highlights. Walk behind Seljalandsfoss, climb Skógafoss steps, reach Reynisfjara black sand beach with basalt sea stacks. Stop in Vík for supplies.',
+    tags: ['Seljalandsfoss (free)', 'Skógafoss (free)', 'Reynisfjara (free)', '⚠ Sneaker wave danger'] },
+  { day: 'D3', route: 'Vík → Jökulsárlón', km: 240, sleep: 'Höfn / Jökulsárlón area',
+    desc: 'Drive east past the Fjaðrárgljúfur canyon detour (Road 206), through Eldhraun lava field, past Skaftafell glacier. Arrive at Jökulsárlón glacier lagoon for icebergs and seals. Walk Diamond Beach.',
+    tags: ['Fjaðrárgljúfur (free)', 'Svartifoss hike (free, optional)', 'Jökulsárlón boat (€60–75)', 'Diamond Beach (free)'] },
+  { day: 'D4', route: 'Jökulsárlón → Reykjavík (via interior)', km: 250, sleep: 'Reykjavík area campsite',
+    desc: 'Long drive back west on Route 1. Optional stop at Kerið volcanic crater. Return to Reykjavík by evening. Explore the city — Hallgrímskirkja, Old Harbour, Laugavegur street.',
+    tags: ['Kerið crater (€6)', 'Hallgrímskirkja (free)', 'Reykjavík city walk'] },
+  { day: 'D5', route: 'Reykjavík → KEF', km: 50, sleep: 'Flight home',
+    desc: 'Morning at leisure. Geothermal pool visit (Laugardalslaug — a real local pool, not a tourist trap), or Blue Lagoon if pre-booked. Return campervans, fly home from KEF.',
+    tags: ['Laugardalslaug pool (€10)', 'Blue Lagoon optional (€75–115, pre-book)', 'Return RVs at KEF'] }
+];
+
+const itin7 = [
+  { day: 'D1', route: 'KEF → Golden Circle', km: 230, sleep: 'Selfoss campsite',
+    desc: 'Arrive KEF, pick up vans. Drive Golden Circle: Þingvellir, Geysir, Gullfoss. Stock up at Selfoss Bonus.',
+    tags: ['Þingvellir (free)', 'Geysir (free)', 'Gullfoss (free)'] },
+  { day: 'D2', route: 'Selfoss → Vík', km: 180, sleep: 'Vík campsite',
+    desc: 'South Coast: Seljalandsfoss, Skógafoss, Reynisfjara black beach. Vík village for supplies.',
+    tags: ['Seljalandsfoss (free)', 'Skógafoss (free)', 'Reynisfjara (free)'] },
+  { day: 'D3', route: 'Vík → Jökulsárlón', km: 240, sleep: 'Höfn / Jökulsárlón area',
+    desc: 'Fjaðrárgljúfur canyon, Eldhraun lava field, Skaftafell hike. Jökulsárlón glacier lagoon and Diamond Beach.',
+    tags: ['Fjaðrárgljúfur (free)', 'Svartifoss (free)', 'Jökulsárlón boat (€60–75)', 'Diamond Beach (free)'] },
+  { day: 'D4', route: 'Höfn → Egilsstaðir', km: 200, sleep: 'Egilsstaðir campsite',
+    desc: 'Skip deep East Fjords; take Route 1 north via Djúpivogur. Arrive Egilsstaðir for supermarket stock-up. Short hike to Hengifoss if energy allows.',
+    tags: ['Djúpivogur village (free)', 'Hengifoss hike (free, optional)', '🛒 Stock up in Egilsstaðir'] },
+  { day: 'D5', route: 'Egilsstaðir → Mývatn', km: 150, sleep: 'Mývatn campsite',
+    desc: 'Drive north into volcanic Iceland. Full afternoon at Mývatn: Námafjall/Hverir mud pots, Dimmuborgir lava formations. Evening at Mývatn Nature Baths.',
+    tags: ['Námafjall/Hverir (free)', 'Dimmuborgir (free)', 'Mývatn Nature Baths (€40–48)'] },
+  { day: 'D6', route: 'Mývatn → Reykjavík (via Akureyri)', km: 380, sleep: 'Reykjavík area campsite',
+    desc: 'Long drive day. Stop at Goðafoss waterfall (Waterfall of the Gods). Lunch in Akureyri. Drive south on Route 1 back towards Reykjavík — through the interior tunnel shortcut (Hvalfjörður or Akrafjall).',
+    tags: ['Goðafoss (free)', 'Akureyri lunch stop', '⚠ Long drive day — 380 km, plan early start'] },
+  { day: 'D7', route: 'Reykjavík → KEF', km: 50, sleep: 'Flight home',
+    desc: 'Morning in Reykjavík — city walk, geothermal pool, or Blue Lagoon. Return campervans at KEF, fly home.',
+    tags: ['Hallgrímskirkja (free)', 'Blue Lagoon optional (€75–115)', 'Return RVs at KEF'] }
+];
+
+const itin10 = [
+  { day: 'D1', route: 'KEF → Golden Circle', km: 230, sleep: 'Selfoss',
+    desc: 'Arrive, pick up vans. Golden Circle: Þingvellir, Geysir, Gullfoss.',
+    tags: ['Þingvellir (free)', 'Geysir (free)', 'Gullfoss (free)'] },
+  { day: 'D2', route: 'Selfoss → Vík', km: 180, sleep: 'Vík',
+    desc: 'South Coast: Seljalandsfoss, Skógafoss, Reynisfjara black beach.',
+    tags: ['Seljalandsfoss (free)', 'Skógafoss (free)', 'Reynisfjara (free)'] },
+  { day: 'D3', route: 'Vík → Skaftafell → Jökulsárlón', km: 200, sleep: 'Höfn',
+    desc: 'Fjaðrárgljúfur, Eldhraun, Svartifoss hike in Skaftafell. Jökulsárlón glacier lagoon and Diamond Beach.',
+    tags: ['Fjaðrárgljúfur (free)', 'Svartifoss (free)', 'Jökulsárlón boat (€60–75)', 'Diamond Beach (free)'] },
+  { day: 'D4', route: 'Höfn → Egilsstaðir (East Fjords drive-through)', km: 200, sleep: 'Egilsstaðir',
+    desc: 'Scenic Route 1 north through East Fjords. Stop in Djúpivogur. Hengifoss waterfall hike at Egilsstaðir if time allows.',
+    tags: ['East Fjords scenic (free)', 'Hengifoss optional (free)'] },
+  { day: 'D5', route: 'Egilsstaðir → Mývatn', km: 150, sleep: 'Mývatn',
+    desc: 'Head north. Hengifoss waterfall (if not done D4), Lagarfljót lake. Arrive Mývatn.',
+    tags: ['Hengifoss (free)', 'Lagarfljót (free)', 'Mývatn Nature Baths (€40–48)'] },
+  { day: 'D6', route: 'Mývatn (full day)', km: 40, sleep: 'Mývatn',
+    desc: 'Full volcanic day: Námafjall/Hverir, Dimmuborgir, Krafla volcano, Skútustaðagígar pseudocraters.',
+    tags: ['Hverir (free)', 'Dimmuborgir (free)', 'Krafla (free)'] },
+  { day: 'D7', route: 'Mývatn → Húsavík → Akureyri', km: 180, sleep: 'Akureyri',
+    desc: 'Morning whale watching in Húsavík (book ahead). Goðafoss waterfall. Arrive Akureyri.',
+    tags: ['Whale watching (€88–116)', 'Goðafoss (free)', 'Akureyri city'] },
+  { day: 'D8', route: 'Akureyri → Hvammstangi → Snæfellsnes', km: 300, sleep: 'Grundarfjörður',
+    desc: 'Long day west. Hvítserkur elephant rock and seals on Vatnsnes Peninsula. Enter Snæfellsnes — Kirkjufell mountain at sunset.',
+    tags: ['Hvítserkur (free)', 'Seal colony (free)', 'Kirkjufell mountain (free)', '⚠ Long drive'] },
+  { day: 'D9', route: 'Snæfellsnes → Reykjavík', km: 250, sleep: 'Reykjavík',
+    desc: 'Morning on Snæfellsnes: Arnarstapi, Djúpalónssandur, Snæfellsjökull glacier viewpoint. Drive back to Reykjavík via Borgarnes.',
+    tags: ['Arnarstapi (free)', 'Snæfellsjökull (free)', 'Settlement Center Borgarnes (€15)'] },
+  { day: 'D10', route: 'Reykjavík → KEF', km: 50, sleep: 'Flight home',
+    desc: 'Morning city walk, geothermal pool, or Blue Lagoon. Return campervans, fly home.',
+    tags: ['Hallgrímskirkja (free)', 'Blue Lagoon optional (€75–115)', 'Return RVs'] }
+];
+
+function buildShortTimeline(data, containerId) {
+  const el = document.getElementById(containerId);
+  if (!el) return;
+  el.innerHTML = data.map(d => `
+    <div class="day-block" data-day="${d.day}">
+      <div class="day-header">
+        <span class="day-title">${d.route}</span>
+        <span class="day-km">${d.km} km</span>
+      </div>
+      <div class="day-body">
+        ${d.desc}
+        <div class="highlights">
+          ${d.tags.map(t => {
+            const cls = t.toLowerCase().includes('free') ? 'free' : t.startsWith('⚠') || t.startsWith('🛒') ? '' : t.includes('€') ? 'paid' : '';
+            return `<span class="tag ${cls}">${t}</span>`;
+          }).join('')}
+        </div>
+        <div style="margin-top:0.4rem; font-size:0.75rem; color:var(--purple)">🏕 ${d.sleep}</div>
+      </div>
+    </div>
+  `).join('');
 }
 
 // ── Build pages ───────────────────────────────────────────────────────────
@@ -1004,6 +1257,9 @@ function show(id) {
 
 // ── Init ──────────────────────────────────────────────────────────────────
 buildItinerary();
+buildShortTimeline(itin5, 'timeline5');
+buildShortTimeline(itin7, 'timeline7');
+buildShortTimeline(itin10, 'timeline10');
 buildAttractions();
 buildRVs();
 calcBudget();
